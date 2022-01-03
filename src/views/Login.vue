@@ -1,0 +1,145 @@
+<template>
+<div>
+<!-- <form class="signForm">
+    <input type="text" id="email" v-model="email" placeholder="email"/><br>
+    <input type="password" id="password" v-model="password" placeholder="password"/><br>
+    <button type="button" @click="postData" class="login">Sign In</button>
+</form> -->
+ <form class="main">
+    <h2>로그인 페이지</h2>
+
+    <div class="input-parent">
+      <label for="email">User Email</label>
+      <input type="text" id="email" v-model="email" placeholder="email">
+      <label for="password">Password</label>
+      <input type="password" id="password" v-model="password" placeholder="password">
+    </div>
+    <button type="button" @click="postData" class="login">Sign In</button>
+  </form>
+</div>    
+</template>
+
+<script>
+const Host = "http://192.168.93.129:8080/user/login";
+
+export default {
+    data: function(){
+        return {
+            email : '',
+            password: ''
+        }
+    },
+    methods:{
+        postData() {
+            const str = {
+                email:this.email,
+                password:this.password
+            }
+
+            this.$axios
+            .post(Host,str)
+            .then((res) => {
+                if(res.status === 200 && res.data.data != null){
+                    this.$cookies.set("token",res.data.data,"60*30");
+                    this.$router.push('/')
+                }
+                else {
+                    console.log(res.data)
+                }
+                
+            })
+            .catch((error) => {
+                console.log(1)
+                console.log(error);
+            })
+        
+        }
+    }
+    
+}
+
+
+</script>
+
+<style scoped>
+*,
+*:before,
+*:after {
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+#main {
+    width: max-content;
+    margin: 40px auto;
+    font-family: "Segoe UI", sans-serif;
+    padding: 25px 28px;
+    background: #151414;
+    border-radius: 4px;
+    border: 1px solid #302d2d;
+    animation: popup 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+@keyframes popup {
+    0% {
+        transform: scale(0.2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: 400;
+    color: #1b0202d7;
+}
+.input-parent {
+    display: block;
+    margin-bottom: 20px;
+}
+label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #a4a4a4;
+}
+.input-parent input {
+    padding: 10px 8px;
+    width: 100%;
+    font-size: 16px;
+    background: #323131;
+    border: none;
+    color: #c7c7c7;
+    border-radius: 4px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+.input-parent input:hover {
+    background: #404040;
+}
+.input-parent input:focus {
+    box-shadow: 0px 0px 0px 1px #0087ff;
+}
+button {
+    padding: 10px 18px;
+    font-size: 15px;
+    background: #1a3969;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    color: #f4f4f4;
+    transition: all 0.2s ease;
+}
+button:hover {
+    opacity: 0.9;
+}
+button:focus {
+    box-shadow: 0px 0px 0px 3px black;
+}
+
+</style>
+
