@@ -6,7 +6,6 @@
 
       <!-- Navbar dropdowns -->
       <b-nav-item-dropdown text="category" right>
-        <b-dropdown-item href="/feed">feed</b-dropdown-item>
         <b-dropdown-item href="/store">store</b-dropdown-item>
       </b-nav-item-dropdown>
 

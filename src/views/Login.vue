@@ -1,10 +1,5 @@
 <template>
 <div>
-<!-- <form class="signForm">
-    <input type="text" id="email" v-model="email" placeholder="email"/><br>
-    <input type="password" id="password" v-model="password" placeholder="password"/><br>
-    <button type="button" @click="postData" class="login">Sign In</button>
-</form> -->
  <form class="main">
     <h2>로그인 페이지</h2>
 
