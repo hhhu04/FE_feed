@@ -1,6 +1,6 @@
 <template>
 <div id="Main">
-    <div v-if="url">
+    <div>
         <vue-good-table 
             :columns="columns"
             :rows="rows"
@@ -14,7 +14,9 @@
             trigger: 'enter',
             skipDiacritics: true,
             placeholder: 'Search this table',
-            }">
+            }"
+            @on-row-click="onRowClick"
+            >
         </vue-good-table><br>
         <b-button block variant="outline-secondary" @click="newFeed()">글쓰기</b-button>
     </div>
@@ -31,8 +33,6 @@ export default {
   },
   data: function(){
         return {
-            // write: this.$router.push('/feed/new'),
-            url : window.location.pathname === '/',
             arr: [],
             contents: [],
             columns: [
@@ -60,6 +60,10 @@ export default {
         }
     },
     methods:{
+         onRowClick(params) {
+             console.log('/feed/'+params.row.id)
+             this.$router.push('/feed/'+params.row.id)
+         },
         newFeed(){
             this.$router.push('/feed/new')
         },

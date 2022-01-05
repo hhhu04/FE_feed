@@ -35,8 +35,11 @@ export default {
             .post(Host,str)
             .then((res) => {
                 if(res.status === 200 && res.data.data != null){
+                    const token = res.data.data
                     this.$cookies.set("token",res.data.data,"60*30");
-                    this.$router.push('/')
+                    this.$axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
+                    // this.$router.push('/')
+                    location.reload
                 }
                 else {
                     console.log(res.data)

@@ -3,7 +3,8 @@ import VueRouter from "vue-router";
 import Main from "./views/Main";
 import About from "./views/About";
 import Login from "./views/Login";
-import NewFeed from "./views/NewFeed";
+import NewFeed from "./views/feed/NewFeed";
+import FeedDetail from "./views/feed/FeedDetail";
 
 Vue.use(VueRouter);
 
@@ -14,6 +15,7 @@ const router = new VueRouter({
         {path:"/about",component:About},
         {path:"/login",component:Login},
         {path:"/feed/new",component:NewFeed},
+        {path:"/feed/:id",component:FeedDetail},
     ]
 })
 
