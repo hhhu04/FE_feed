@@ -30,11 +30,17 @@
                 <hr>
                 <vue-good-table
                     :columns="columns"
-                    :rows="comments"/>
+                    :rows="comments"
+                    :line-numbers="true"
+                    :pagination-options="{
+                        enabled: true,
+                        perPage: 2,
+                    }"
+                    />
         
         <form>
-            <input type="text" v-model="commentBody">
-            <b-button block variant="outline-secondary" @click="newComment()">댓글 저장</b-button>
+            <input type="text" v-model="commentBody" style="width:85%">
+            <b-button block variant="outline-secondary" @click="newComment()">댓글 저장</b-button>&nbsp; <b-button block variant="outline-secondary" @click="back()">뒤로</b-button>
         </form>
     </div>
 </div>
@@ -43,8 +49,8 @@
 <script>
 var pathName = location.pathname.split("/")
 var id = pathName[2]
-const Host = "http://192.168.93.129:8080/feed/"+id;
-const url = "http://192.168.93.129:8080/comment/new"
+const Host = "http://192.168.88.128:8080/feed/"+id;
+const url = "http://192.168.88.128:8080/comment/new"
 
 
 export default {
@@ -81,6 +87,9 @@ export default {
         }
     },
     methods:{
+        back(){
+            this.$router.push("/")
+        },
         newComment(){
             const str = {
                 feedId:id,
@@ -90,14 +99,13 @@ export default {
 
              this.$axios
             .post(url,str,{
-                headers:{
-                    Authorization: `${this.$cookies.get("token")}`,
-                }
-            })
+                headers: {
+                Authorization:this.$cookies.get("token")
+            }
+        })
             .then((res) => {
                 if(res.status === 200 && res.data.data != null){
-                    const token = res.data.data
-                    console.log(token)
+                    this.$router.go();
                 }
                 else {
                     console.log(res.data)
@@ -112,8 +120,13 @@ export default {
         
         },
         getData() {
+            let token = this.$cookies.get("token")
             this.$axios
-            .get(Host)
+            .get(Host,{
+                headers: {
+                Authorization:`${token}`
+            }
+        })
             .then((res) => {
                 if(res.status === 200){
                     this.comments = res.data.data.comments
@@ -137,7 +150,8 @@ export default {
         }
     }
 
-  
+
+
 
 }
 
@@ -152,7 +166,7 @@ export default {
     }
 	.tbAdd th, .tbAdd td{border-bottom:1px solid #eee; padding:5px 0; }
 	.tbAdd td{padding:10px 10px; box-sizing:border-box; text-align:left;}
-	.tbAdd td.txt_cont{height:300px; vertical-align:top;}
+	.tbAdd td.txt_cont{height:200px; vertical-align:top;}
 	.btnWrap{text-align:center; margin:20px 0 0 0;}
 	.btnWrap a{margin:0 10px;}
 	.btnAdd {background:#43b984}

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-const Host = "http://192.168.93.129:8080/allFeed";
+const Host = "http://192.168.88.128:8080/allFeed";
 
 export default {
     name: "Main",
@@ -61,11 +61,11 @@ export default {
     },
     methods:{
          onRowClick(params) {
-             console.log('/feed/'+params.row.id)
-             this.$router.push('/feed/'+params.row.id)
+             this.$router.replace('/feed/'+params.row.id)
+             this.$router.go()
          },
         newFeed(){
-            this.$router.push('/feed/new')
+            this.$router.replace('/feed/new')
         },
         getData() {
             this.$axios

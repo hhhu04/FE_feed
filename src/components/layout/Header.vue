@@ -27,6 +27,11 @@ export default {
             token: this.$cookies.isKey("token")
         };
     },
-    methods:{}
+    methods:{
+      
+    }
 }
 </script>
+
+
+

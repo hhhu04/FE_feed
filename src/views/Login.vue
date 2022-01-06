@@ -15,7 +15,7 @@
 </template>
 
 <script>
-const Host = "http://192.168.93.129:8080/user/login";
+const Host = "http://192.168.88.128:8080/user/login";
 
 export default {
     data: function(){
@@ -35,11 +35,9 @@ export default {
             .post(Host,str)
             .then((res) => {
                 if(res.status === 200 && res.data.data != null){
-                    const token = res.data.data
                     this.$cookies.set("token",res.data.data,"60*30");
-                    this.$axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
-                    // this.$router.push('/')
-                    location.reload
+                    this.$router.replace("/")
+                    
                 }
                 else {
                     console.log(res.data)
