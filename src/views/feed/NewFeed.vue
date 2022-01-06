@@ -1,15 +1,9 @@
-<template>
-  <vue-editor v-model="content" />
-</template>
 
-<script>
-import { VueEditor } from "vue2-editor";
 
-export default {
-  components: { VueEditor },
-
-  data: () => ({
-    content: ""
-  })
-};
-</script>
+// ,
+//   methods:{
+//     newContent(){
+//       console.log(this.content)
+//     }
+//   }
+  // <b-button block variant="outline-secondary" @click="newContent()">등록</b-button>
