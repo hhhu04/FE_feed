@@ -46,6 +46,7 @@ var id = pathName[2]
 const Host = "http://192.168.93.129:8080/feed/"+id;
 const url = "http://192.168.93.129:8080/comment/new"
 
+
 export default {
     name: "Detail",
    mounted:window.onload = function(){
@@ -76,7 +77,7 @@ export default {
             time:'',
             comments:[],
             commentBody:'',
-
+            token: this.$cookies.get("token")
         }
     },
     methods:{
@@ -112,11 +113,7 @@ export default {
         },
         getData() {
             this.$axios
-            .get(Host,{
-                headers:{
-                    Authorization: `Bearer ${this.$cookies.get("token")}`,
-                }
-            })
+            .get(Host)
             .then((res) => {
                 if(res.status === 200){
                     this.comments = res.data.data.comments

@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueGoodTablePlugin from 'vue-good-table';
 import Vue2Editor from "vue2-editor";
-
+import { store } from "./store";
 
 
 // import the styles 
@@ -33,5 +33,6 @@ Vue.config.productionTip = false
 
 new Vue({
     router,
+    store: store,
   render: h => h(App),
 }).$mount('#app')
