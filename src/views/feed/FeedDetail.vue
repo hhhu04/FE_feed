@@ -2,41 +2,41 @@
 <div id="Detail">
     <div>
         <table class="tbAdd" >
-					<colgroup>
-						<col width="15%" />
-						<col width="*" />
-					</colgroup>
-					<tr>
-						<th>제목</th>
-						<td>{{title}}</td>
-					</tr>
-                    <tr>
-						<th>글쓴이</th>
-						<td>{{nickName}}</td>
-					</tr>
-                    <tr>
-						<th>작성시간</th>
-						<td>{{time}}</td>
-					</tr>
-                    <tr v-if="img">
-						<th>사진</th>
-						<td class="txt_cont">{{img}}</td>
-					</tr>
-					<tr>
-						<th>내용</th>
-						<td class="txt_cont">{{body}}</td>
-					</tr>
-				</table>
-                <hr>
-                <vue-good-table
-                    :columns="columns"
-                    :rows="comments"
-                    :line-numbers="true"
-                    :pagination-options="{
-                        enabled: true,
-                        perPage: 2,
-                    }"
-                    />
+            <colgroup>
+                <col width="15%" />
+                <col width="*" />
+            </colgroup>
+            <tr>
+                <th>제목</th>
+                <td>{{title}}</td>
+            </tr>
+            <tr>
+                <th>글쓴이</th>
+                <td>{{nickName}}</td>
+            </tr>
+            <tr>
+                <th>작성시간</th>
+                <td>{{time}}</td>
+            </tr>
+            <tr v-if="img">
+                <th>사진</th>
+                <td class="txt_cont">{{img}}</td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td class="txt_cont">{{body}}</td>
+            </tr>
+        </table>
+        <hr>
+        <vue-good-table
+            :columns="columns"
+            :rows="comments"
+            :line-numbers="true"
+            :pagination-options="{
+                enabled: true,
+                perPage: 2,
+            }"
+            />
         
         <form>
             <input type="text" v-model="commentBody" style="width:85%">
@@ -49,10 +49,6 @@
 <script>
 var pathName = location.pathname.split("/")
 var id = pathName[2]
-const Host = "http://192.168.88.128:8080/feed/"+id;
-const url = "http://192.168.88.128:8080/comment/new"
-
-
 export default {
     name: "Detail",
    mounted:window.onload = function(){
@@ -96,6 +92,7 @@ export default {
                 body:this.commentBody
             }
 
+            var url = this.$host + '/comment/new'
 
              this.$axios
             .post(url,str,{
@@ -120,11 +117,12 @@ export default {
         
         },
         getData() {
-            let token = this.$cookies.get("token")
+            var url = this.$host + '/feed/'+id
+
             this.$axios
-            .get(Host,{
+            .get(url,{
                 headers: {
-                Authorization:`${token}`
+                Authorization:this.$cookies.get("token")
             }
         })
             .then((res) => {

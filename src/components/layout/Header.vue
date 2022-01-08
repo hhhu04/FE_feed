@@ -24,13 +24,14 @@ export default {
     name:"Header",
     data(){
         return  { 
-            token: this.$cookies.remove("token")
+            token: this.$cookies.isKey("token")
           
         };
     },
     methods:{
       logout(){
-        this.$cookies.set
+        this.$cookies.remove("token")
+        this.$router.go("/")
       }
     }
 }

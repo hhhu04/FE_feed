@@ -15,7 +15,6 @@
 </template>
 
 <script>
-const Host = "http://192.168.88.128:8080/user/login";
 
 export default {
     data: function(){
@@ -31,8 +30,10 @@ export default {
                 password:this.password
             }
 
+            var url = this.$host + '/user/login'
+
             this.$axios
-            .post(Host,str)
+            .post(url,str)
             .then((res) => {
                 if(res.status === 200 && res.data.data != null){
                     this.$cookies.set("token",res.data.data,"60*30");

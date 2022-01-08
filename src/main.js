@@ -23,6 +23,8 @@ Vue.prototype.$eventBus = new Vue();
 Vue.prototype.$cookies = VueCookies;
 Vue.prototype.$axios = axios;
 
+Vue.prototype.$host = 'http://192.168.88.128:8080'
+
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)

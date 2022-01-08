@@ -19,7 +19,6 @@
 					</tr>
           <tr>
             <td>사진</td>
-            <!-- <td><input type="file" @change="onInutImage" multiple accept="image/*" id="file" ref="image"></td> -->
             <td><input type="file" v-on:change="onInutImage" multiple accept="image/*" id="file" ref="image"></td>
           </tr>
 				</table>
@@ -45,34 +44,38 @@ export default {
 	,methods:{
     onInutImage(e){
       var file = e.target.files[0]
-      this.img = window.URL.createObjectURL(file)
-      console.log(this.img)
+	this.img = file
     },
 		fnList(){ 
-			// this.$router.push('/');
+			this.$router.push('/');
 			
 		}
 		,fnAddProc() { 
 			if(!this.subject) { 
 				alert("제목을 입력해 주세요");
-				this.$refs.subject.focus(); 
 				return;
 			}
 
-      const str = {
-                title : this.subject,
-                body:this.cont,
-                img:this.img
-            }
+			if(!this.cont){
+				alert("본문을 입력하세요")
+				return;
+			}
 
+			let data = new FormData()
+			data.append('title',this.subject)
+			data.append('body',this.cont)
+			data.append('img',this.img)
+
+			var url = this.$host+'/feed/new'
 			
-			this.$axios.post('http://192.168.88.128:8080/feed/new',str,{
+			this.$axios.post(url,data,{
                 headers: {
                 Authorization:this.$cookies.get("token"),
+				'Content-Type' : 'multipart/form-data'
             }
         })
 			.then((res)=>{
-				if(res.data === 1) {
+				if(res.status === 200) {
 					alert('등록되었습니다.');
 					this.fnList();
 				} else {

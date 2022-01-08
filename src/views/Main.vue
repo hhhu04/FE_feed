@@ -24,8 +24,6 @@
 </template>
 
 <script>
-const Host = "http://192.168.88.128:8080/allFeed";
-
 export default {
     name: "Main",
    mounted:window.onload = function(){
@@ -33,8 +31,6 @@ export default {
   },
   data: function(){
         return {
-            arr: [],
-            contents: [],
             columns: [
                 {
                 label: 'Name',
@@ -68,11 +64,11 @@ export default {
             this.$router.replace('/feed/new')
         },
         getData() {
+            var url = this.$host + '/all_feed'
             this.$axios
-            .get(Host)
+            .get(url)
             .then((res) => {
                 if(res.status === 200){
-                    this.arr = res.data
                     this.rows = res.data.content
                 }
                 else {

@@ -12,6 +12,7 @@
 </div>
 </template>
 <script>
+
 export default {
     data(){
         return  { 
@@ -21,7 +22,7 @@ export default {
     },
     methods:{
         getData() {
-            alert(this.title);
+            alert(this.$host);
         },
         setData() {
             this.title="12345"
