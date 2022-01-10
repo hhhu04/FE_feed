@@ -10,6 +10,7 @@ import VueGoodTablePlugin from 'vue-good-table';
 import Vue2Editor from "vue2-editor";
 import { store } from "./store";
 
+
 // import the styles 
 import 'vue-good-table/dist/vue-good-table.css'
 

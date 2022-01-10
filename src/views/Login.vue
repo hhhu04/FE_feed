@@ -10,27 +10,51 @@
       <input type="password" id="password" v-model="password" placeholder="password">
     </div>
     <button type="button" @click="postData" class="login">Sign In</button>
+    <button type="button" @click="kaka()" class="kaka"><img :src="kakao" class="social"></button><br>
   </form>
 </div>    
 </template>
 
 <script>
-
+function result(temp){// eslint-disable-line no-unused-vars
+            this.$cookies.set("token",temp,"60*30")  
+            window.close()
+        }
+    
 export default {
     data: function(){
         return {
             email : '',
-            password: ''
+            password: '',
+            kakao: require('../assets/kakao_login_large_wide.png')
         }
     },
     methods:{
+        result(temp){
+            this.$cookies.set("token",temp,"60*30")
+        },
+        kaka(){
+            var url = this.$host + '/kakao/login'
+            this.$axios
+            .get(url)
+            .then((res) => {
+                window.open(res.data)
+                this.$router.replace("/")
+            })
+            .catch((error) => {
+                console.log(1)
+                console.log(error);
+            })
+            
+
+        },
         postData() {
             const str = {
                 email:this.email,
                 password:this.password
             }
 
-            var url = this.$host + '/user/login'
+            var url = this.$host + '/user/login/'
 
             this.$axios
             .post(url,str)
@@ -121,12 +145,14 @@ label {
 .input-parent input:focus {
     box-shadow: 0px 0px 0px 1px #0087ff;
 }
-button {
+.login {
     padding: 10px 18px;
     font-size: 15px;
     background: #1a3969;
-    width: 100%;
-    border: none;
+    display: block;
+    margin: auto;
+    width: 40%;
+    border: 0;
     border-radius: 4px;
     color: #f4f4f4;
     transition: all 0.2s ease;
@@ -136,6 +162,19 @@ button:hover {
 }
 button:focus {
     box-shadow: 0px 0px 0px 3px black;
+}
+.kaka {
+    display: block;
+    margin: auto;
+    padding: 0%;
+    width: 40%;
+    height: 40px;
+    border: 0;
+}
+
+.social {
+    width: 100%;
+    height: 40px;
 }
 
 </style>
