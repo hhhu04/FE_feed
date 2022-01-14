@@ -7,7 +7,7 @@ import NewFeed from "./views/feed/NewFeed";
 import FeedDetail from "./views/feed/FeedDetail";
 import MyPage from "./views/MyPage"
 import Social from './views/Social'
-import Store from "./views/store/ItemDetail"
+import Store from "./views/store/Store"
 import NewItem from "./views/store/NewItem"
 import ItemDetail from "./views/store/ItemDetail"
 
@@ -25,7 +25,7 @@ const router = new VueRouter({
         {path:"/social",component:Social},
         {path:"/store",component:Store},
         {path:"/store/new",component:NewItem},
-        {path:"/store/:id",component:ItemDetail},
+        {path:"/store/:title",component:ItemDetail},
     ]
 })
 

@@ -28,27 +28,15 @@
             </tr>
         </table>
         <hr>
-        <vue-good-table
-            :columns="columns"
-            :rows="comments"
-            :line-numbers="true"
-            :pagination-options="{
-                enabled: true,
-                perPage: 2,
-            }"
-            />
-        
-        <form>
-            <input type="text" v-model="commentBody" style="width:85%">
-            <b-button block variant="outline-secondary" @click="newComment()">댓글 저장</b-button>&nbsp; <b-button block variant="outline-secondary" @click="back()">뒤로</b-button>
-        </form>
+      
+        <b-button block variant="outline-secondary" @click="back()">뒤로</b-button>
     </div>
 </div>
 </template>
 
 <script>
 var pathName = location.pathname.split("/")
-var id = pathName[2]
+var title = pathName[2]
 export default {
     name: "Detail",
    mounted:window.onload = function(){
@@ -86,38 +74,8 @@ export default {
         back(){
             this.$router.push("/")
         },
-        newComment(){
-            const str = {
-                feedId:id,
-                body:this.commentBody
-            }
-
-            var url = this.$host + '/comment/new'
-
-             this.$axios
-            .post(url,str,{
-                headers: {
-                Authorization:this.$cookies.get("token")
-            }
-        })
-            .then((res) => {
-                if(res.status === 200 && res.data.data != null){
-                    this.$router.go();
-                }
-                else {
-                    console.log(res.data)
-                }
-                
-            })
-            .catch((error) => {
-                console.log(1)
-                console.log(error);
-            })
-        
-        
-        },
         getData() {
-            var url = this.$host + '/feed/'+id
+            var url = this.$host + '/store/'+title
 
             this.$axios
             .get(url,{

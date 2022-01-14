@@ -1,5 +1,5 @@
 <template>
-<div id="Main">
+<div id="Store">
     <div>
         <vue-good-table 
             :columns="columns"
@@ -18,14 +18,14 @@
             @on-row-click="onRowClick"
             >
         </vue-good-table><br>
-        <b-button block variant="outline-secondary" @click="newFeed()">글쓰기</b-button>
+        <b-button block variant="outline-secondary" @click="newItem()">상품등록</b-button>
     </div>
 </div>
 </template>
 
 <script>
 export default {
-    name: "Main",
+    name: "Store",
    mounted:window.onload = function(){
       this.getData()
   },
@@ -37,8 +37,8 @@ export default {
                 field: 'nickName',
                 },
                 {
-                label: 'title',
-                field: 'title',
+                label: 'item',
+                field: 'name',
                 type: 'String',
                 },
                 {
@@ -47,8 +47,8 @@ export default {
                 type: 'String',
                 },
                 {
-                label: 'comments',
-                field: 'comments.length',
+                label: 'amount',
+                field: 'total',
                 type: 'number',
                 },
             ],
@@ -57,18 +57,19 @@ export default {
     },
     methods:{
          onRowClick(params) {
-             this.$router.replace('/feed/'+params.row.id)
+             this.$router.replace('/store/'+params.row.name)
              this.$router.go()
          },
-        newFeed(){
-            this.$router.replace('/feed/new')
+        newItem(){
+            this.$router.replace('/store/new')
         },
         getData() {
-            var url = this.$host + '/all_feed'
+            var url = this.$host + '/all_item'
             this.$axios
             .get(url)
             .then((res) => {
                 if(res.status === 200){
+                    console.log(res.data)
                     this.rows = res.data.content
                 }
                 else {

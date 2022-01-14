@@ -9,7 +9,7 @@
       <label for="password">Password</label>
       <input type="password" id="password" v-model="password" placeholder="password">
     </div>
-    <button type="button" @click="postData" class="login">Sign In</button>
+    <button type="button" @click="postData" class="login">Sign In</button><br>
     <button type="button" @click="kaka()" class="kaka"><img :src="kakao" class="social"></button><br>
   </form>
 </div>    
