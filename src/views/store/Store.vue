@@ -69,7 +69,6 @@ export default {
             .get(url)
             .then((res) => {
                 if(res.status === 200){
-                    console.log(res.data)
                     this.rows = res.data.content
                 }
                 else {

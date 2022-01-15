@@ -54,7 +54,7 @@ export default {
                 password:this.password
             }
 
-            var url = this.$host + '/user/login/'
+            var url = this.$host + '/user/login'
 
             this.$axios
             .post(url,str)
