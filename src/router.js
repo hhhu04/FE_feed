@@ -25,7 +25,7 @@ const router = new VueRouter({
         {path:"/social",component:Social},
         {path:"/store",component:Store},
         {path:"/store/new",component:NewItem},
-        {path:"/store/:title",component:ItemDetail},
+        {path:"/store/:id",component:ItemDetail},
     ]
 })
 

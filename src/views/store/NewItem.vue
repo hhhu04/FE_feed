@@ -21,10 +21,7 @@
 						<th>가격</th>
 						<td><input type="number" v-model="price" ref="subject" /></td>
 					</tr>
-					<tr>
-						<th>설명</th>
-						<td><textarea v-model="cont" ref="cont"></textarea></td>
-					</tr>
+		
 					<tr>
 						<td>사진</td>
 						<td><input type="file" v-on:change="onInutImage" multiple accept="image/*" id="file" ref="image"></td>
@@ -72,10 +69,6 @@ export default {
 				return;
 			}
 
-			if(!this.cont){
-				alert("설명을 입력하세요")
-				return;
-			}
 
 			if(!this.amount){
 				alert("수량을 입력하세요")

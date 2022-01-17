@@ -57,7 +57,7 @@ export default {
     },
     methods:{
          onRowClick(params) {
-             this.$router.replace('/store/'+params.row.name)
+             this.$router.replace('/store/'+params.row.id)
              this.$router.go()
          },
         newItem(){
@@ -69,7 +69,7 @@ export default {
             .get(url)
             .then((res) => {
                 if(res.status === 200){
-                    this.rows = res.data.content
+                    this.rows = res.data.data.content
                 }
                 else {
                     console.log(res.data)

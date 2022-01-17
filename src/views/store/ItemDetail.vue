@@ -7,25 +7,30 @@
                 <col width="*" />
             </colgroup>
             <tr>
-                <th>제목</th>
-                <td>{{title}}</td>
+                <th>품명</th>
+                <td>{{name}}</td>
             </tr>
             <tr>
-                <th>글쓴이</th>
+                <th>등록자</th>
                 <td>{{nickName}}</td>
             </tr>
             <tr>
-                <th>작성시간</th>
+                <th>가격</th>
+                <td>{{price}}</td>
+            </tr>
+            <tr>
+                <th>수량</th>
+                <td>{{amount}}</td>
+            </tr>
+            <tr>
+                <th>등록시간</th>
                 <td>{{time}}</td>
             </tr>
             <tr v-if="img">
                 <th>사진</th>
-                <td class="txt_cont">{{img}}</td>
+                <td class="txt_cont"><img :src="require(`../../assets/${img}`)" class="social"></td>
             </tr>
-            <tr>
-                <th>내용</th>
-                <td class="txt_cont">{{body}}</td>
-            </tr>
+           
         </table>
         <hr>
       
@@ -36,7 +41,7 @@
 
 <script>
 var pathName = location.pathname.split("/")
-var title = pathName[2]
+var id = pathName[2]
 export default {
     name: "Detail",
    mounted:window.onload = function(){
@@ -44,30 +49,17 @@ export default {
   },
   data: function(){
         return {
-             columns: [
-        {
-          label: 'Name',
-          field: 'nickName',
-        },
-         {
-          label: 'body',
-          field: 'body',
-          type: 'String',
-        },
-        {
-          label: 'Created At',
-          field: 'createdAt',
-          type: 'String',
-        },
-      ],
-            title:'',
+            name:'',
             nickName:'',
-            body:'',
             img:'',
             time:'',
-            comments:[],
-            commentBody:'',
-            token: this.$cookies.get("token")
+            price:'',
+            amount:'',
+            userid: '',
+            token: this.$cookies.get("token"),
+            imgUrl: ''
+            // C:\Users\cat\FE_feed\src
+            // C:/Users/cat/Desktop/img/
         }
     },
     methods:{
@@ -75,8 +67,7 @@ export default {
             this.$router.push("/")
         },
         getData() {
-            var url = this.$host + '/store/'+title
-
+            var url = this.$host + '/store/'+id
             this.$axios
             .get(url,{
                 headers: {
@@ -85,13 +76,18 @@ export default {
         })
             .then((res) => {
                 if(res.status === 200){
-                    this.comments = res.data.data.comments
-                    this.title = res.data.data.title
+                    this.price = res.data.data.price
+                    this.name = res.data.data.name
                     this.nickName = res.data.data.nickName
-                    this.body = res.data.data.body
+                    this.amount = res.data.data.total
                     this.time = res.data.data.createdAt
                     if(res.data.data.img === '-1') this.img = false
-                    else this.img = res.data.data.img
+                    else {
+                        var im = '../../assets/'+res.data.data.img
+                        console.log(im)
+                        this.img = res.data.data.img
+                        console.log(this.img)
+                    }
                 }
                 else {
                     console.log(res.data)
@@ -114,6 +110,12 @@ export default {
 </script>
 
 <style scoped>
+.social {
+    width: 400px;
+    height: 500px;
+    display: block;
+    margin: auto;
+}
 	.tbAdd{
         border-top:1px solid #888;
         width: 90%;
