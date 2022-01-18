@@ -34,6 +34,9 @@
             </tr>
         </table>
         <b-button block variant="outline-secondary" @click="back()">뒤로</b-button>
+        <b-button block variant="outline-secondary" @click="back()">장바구니</b-button>
+        <b-button block variant="outline-secondary" @click="putData()">수정</b-button>
+        <b-button block variant="outline-secondary" @click="deleteData()">탈퇴</b-button>
     </div>
 </div>
 </template>
@@ -55,6 +58,25 @@ export default {
         }
     },
     methods:{
+        putData(){
+            this.$router.replace("/put/user")
+        },
+        deleteData(){
+            if(confirm("정말 삭제 하시겠습니까?")){
+            //     var url = this.$host + '/user/delete'
+            //     this.$axios.put(url,{
+            //     headers: {
+            //     Authorization:this.$cookies.get("token")
+            //     }
+            // }).then((res) => {
+            //     console.log(res.data)
+                
+            // })
+            // .catch((error) => {
+            //     console.log(error);
+            // })
+            }
+        },
         back(){
             this.$router.go(-1)
         },
