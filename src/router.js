@@ -22,7 +22,7 @@ const router = new VueRouter({
         {path:"/about",component:About},
         {path:"/login",component:Login},
         {path:"/join",component:Join},
-        {path:"/join/kakao",component:JoinKakao},
+        {path:"/join/kakao/:email",component:JoinKakao},
         {path:"/feed/new",component:NewFeed},
         {path:"/feed/:id",component:FeedDetail},
         {path:"/mypage",component:MyPage},

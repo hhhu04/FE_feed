@@ -13,7 +13,8 @@
 </template>
 
 <script>
-
+var pathName = location.pathname.split("/")
+var email = pathName[3]
     
 export default {
     data: function(){
@@ -29,6 +30,7 @@ export default {
 
         postData() {
             const str = {
+                email: email,
                 nickName: this.nickName
             }
 
@@ -38,7 +40,8 @@ export default {
             .post(url,str)
             .then((res) => {
                 if(res.status === 200){
-                    this.$router.replace("/login")
+                    alert("가입 성공. 다시 로그인 해주세요")
+                    window.close()
                 }
                 else {
                     console.log(res.data)

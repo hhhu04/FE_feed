@@ -17,12 +17,11 @@
 </template>
 
 <script>
-function result(temp){// eslint-disable-line no-unused-vars
-            this.$cookies.set("token",temp,"60*30")  
-            window.close()
-        }
-    
+
 export default {
+    mounted:window.onload = function(){
+      if(this.$cookies.isKey("token")) this.$router.replace("/")
+    },
     data: function(){
         return {
             email : '',
@@ -44,9 +43,9 @@ export default {
             .then((res) => {
                 window.open(res.data)
                 this.$router.replace("/")
+                
             })
             .catch((error) => {
-                console.log(1)
                 console.log(error);
             })
             
@@ -74,7 +73,6 @@ export default {
                 
             })
             .catch((error) => {
-                console.log(1)
                 console.log(error);
             })
         
