@@ -28,9 +28,9 @@
             </tr>
             <tr v-if="img">
                 <th>사진</th>
-                <td class="txt_cont"><img :src="require(`../../assets/${img}`)" class="social"></td>
+                <td class="txt_cont"><img :src="require(`@/assets/${img}`)" class="social"></td>
             </tr>
-           
+           C:\Users\cat\FE_feed\src\assets
         </table>
         <hr>
       
@@ -57,9 +57,6 @@ export default {
             amount:'',
             userid: '',
             token: this.$cookies.get("token"),
-            imgUrl: ''
-            // C:\Users\cat\FE_feed\src
-            // C:/Users/cat/Desktop/img/
         }
     },
     methods:{
@@ -84,7 +81,6 @@ export default {
                     if(res.data.data.img === '-1') this.img = false
                     else {
                         var im = '../../assets/'+res.data.data.img
-                        console.log(im)
                         this.img = res.data.data.img
                         console.log(this.img)
                     }
