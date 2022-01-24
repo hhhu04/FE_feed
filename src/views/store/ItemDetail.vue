@@ -62,7 +62,7 @@ export default {
     },
     methods:{
         back(){
-            this.$router.push("/")
+            this.$router.push("/store")
         },
         getImg() {
             var imgUrl = this.$host + '/store/img?image='+this.img
