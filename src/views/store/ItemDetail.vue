@@ -28,9 +28,9 @@
             </tr>
             <tr v-if="img">
                 <th>사진</th>
-                <td class="txt_cont"><img :src="require(`../../assets/${img}`)" class="social"></td>
+                <!-- <td class="txt_cont"><img :src="require(`@/assets/${img}`)" class="social"></td> -->
+                <td class="txt_cont"><img :src="imgUrl" class="social"></td>
             </tr>
-           
         </table>
         <hr>
       
@@ -58,13 +58,22 @@ export default {
             userid: '',
             token: this.$cookies.get("token"),
             imgUrl: ''
-            // C:\Users\cat\FE_feed\src
-            // C:/Users/cat/Desktop/img/
         }
     },
     methods:{
         back(){
-            this.$router.push("/")
+            this.$router.push("/store")
+        },
+        getImg() {
+            var imgUrl = this.$host + '/store/img?image='+this.img
+            this.$axios
+                .get(imgUrl)
+                .then((res) => {
+                    this.imgUrl = "data:image/jpg;base64," + res.data;
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
         },
         getData() {
             var url = this.$host + '/store/'+id
@@ -83,10 +92,8 @@ export default {
                     this.time = res.data.data.createdAt
                     if(res.data.data.img === '-1') this.img = false
                     else {
-                        var im = '../../assets/'+res.data.data.img
-                        console.log(im)
                         this.img = res.data.data.img
-                        console.log(this.img)
+                        this.getImg()
                     }
                 }
                 else {

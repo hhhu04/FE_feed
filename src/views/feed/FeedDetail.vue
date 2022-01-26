@@ -20,7 +20,7 @@
             </tr>
             <tr v-if="img">
                 <th>사진</th>
-                <td class="txt_cont">{{img}}</td>
+                <td class="txt_cont"><img :src="imgUrl" class="social"></td>
             </tr>
             <tr>
                 <th>내용</th>
@@ -79,7 +79,8 @@ export default {
             time:'',
             comments:[],
             commentBody:'',
-            token: this.$cookies.get("token")
+            token: this.$cookies.get("token"),
+            imgUrl: ''
         }
     },
     methods:{
@@ -116,6 +117,21 @@ export default {
         
         
         },
+        getImg() {
+            var imgUrl = this.$host + '/feed/img?image='+this.img
+            this.$axios
+                .get(imgUrl,{
+                headers: {
+                Authorization:this.$cookies.get("token")
+            }
+        })
+                .then((res) => {
+                    this.imgUrl = "data:image/jpg;base64," + res.data;
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        },
         getData() {
             var url = this.$host + '/feed/'+id
 
@@ -133,7 +149,10 @@ export default {
                     this.body = res.data.data.body
                     this.time = res.data.data.createdAt
                     if(res.data.data.img === '-1') this.img = false
-                    else this.img = res.data.data.img
+                    else {
+                        this.img = res.data.data.img
+                        this.getImg()
+                    }
                 }
                 else {
                     console.log(res.data)
@@ -156,6 +175,12 @@ export default {
 </script>
 
 <style scoped>
+.social {
+    width: 400px;
+    height: 500px;
+    display: block;
+    margin: auto;
+}
 	.tbAdd{
         border-top:1px solid #888;
         width: 90%;

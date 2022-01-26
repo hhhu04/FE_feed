@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Main from "./views/Main";
 import About from "./views/About";
 import Login from "./views/Login";
+import Join from "./views/Join";
+import JoinKakao from "./views/JoinKakao";
 import NewFeed from "./views/feed/NewFeed";
 import FeedDetail from "./views/feed/FeedDetail";
 import MyPage from "./views/MyPage"
@@ -19,6 +21,8 @@ const router = new VueRouter({
         {path:"/",component:Main},
         {path:"/about",component:About},
         {path:"/login",component:Login},
+        {path:"/join",component:Join},
+        {path:"/join/kakao/:email",component:JoinKakao},
         {path:"/feed/new",component:NewFeed},
         {path:"/feed/:id",component:FeedDetail},
         {path:"/mypage",component:MyPage},

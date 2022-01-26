@@ -1,71 +1,47 @@
 <template>
 <div>
  <form class="main">
-    <h2>로그인 페이지</h2>
+    <h2>가입 페이지</h2>
 
     <div class="input-parent">
-      <label for="email">User Email</label>
-      <input type="text" id="email" v-model="email" placeholder="email">
-      <label for="password">Password</label>
-      <input type="password" id="password" v-model="password" placeholder="password">
+      <label for="text">nickName</label>
+      <input type="text" id="nickName" v-model="nickName" placeholder="nickName">
     </div>
-    <button type="button" @click="postData" class="login">Sign In</button><br>
-    <button type="button" @click="kaka()" class="kaka"><img :src="kakao" class="social"></button><br>
-    <button type="button" @click="join" class="login">Sign Up</button><br>
+    <button type="button" @click="postData" class="login">Sign Un</button><br>
   </form>
 </div>    
 </template>
 
 <script>
-
+var pathName = location.pathname.split("/")
+var email = pathName[3]
+    
 export default {
-    mounted:window.onload = function(){
-      if(this.$cookies.isKey("token")) this.$router.replace("/")
-    },
     data: function(){
         return {
-            email : '',
-            password: '',
-            kakao: require('../assets/kakao_login_large_wide.png')
+            nickName: '',
         }
     },
     methods:{
-        join(){
-            this.$router.replace("/join")
-        },
         result(temp){
             this.$cookies.set("token",temp,"60*30")
         },
-        kaka(){
-            var url = this.$host + '/kakao/login'
-            this.$axios
-            .get(url)
-            .then((res) => {
-                window.open(res.data)
-                this.$router.replace("/")
-                
-            })
-            .catch((error) => {
-                console.log(error);
-            })
             
 
-        },
         postData() {
             const str = {
-                email:this.email,
-                password:this.password
+                email: email,
+                nickName: this.nickName
             }
 
-            var url = this.$host + '/user/login'
+            var url = this.$host + '/user/join/kakao'
 
             this.$axios
             .post(url,str)
             .then((res) => {
-                if(res.status === 200 && res.data.data != null){
-                    this.$cookies.set("token",res.data.data,"60*30");
-                    this.$router.replace("/")
-                    
+                if(res.status === 200){
+                    alert("가입 성공. 다시 로그인 해주세요")
+                    window.close()
                 }
                 else {
                     console.log(res.data)
@@ -73,6 +49,7 @@ export default {
                 
             })
             .catch((error) => {
+                console.log(1)
                 console.log(error);
             })
         
