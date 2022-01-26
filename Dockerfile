@@ -1,4 +1,4 @@
-FROM node:16.13-alpine as build-stage
+FROM node:16.13-alpine
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
@@ -12,7 +12,3 @@ EXPOSE 8000
 
 CMD ["npm","run","serve"]
 
-# FROM nginx:latest as production-stage
-# COPY --from=build-stage /app/dist /usr/share/nginx/html
-# EXPOSE 80
-# CMD ["nginx","-g","daemon off;"]
