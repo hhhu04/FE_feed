@@ -1,5 +1,6 @@
 <template>
 <div id="Main">
+    <h2>젠킨스 테스트</h2> 
     <div>
         <vue-good-table 
             :columns="columns"
