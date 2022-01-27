@@ -63,6 +63,7 @@ export default {
         },
         deleteData(){
             if(confirm("정말 삭제 하시겠습니까?")){
+                alert("준비중")
             //     var url = this.$host + '/user/delete'
             //     this.$axios.put(url,{
             //     headers: {
