@@ -84,6 +84,10 @@ export default {
 			})
 			.catch((err)=>{
 				console.log(err);
+				if(error.status === 403){
+                    alert("로그인해 주세요")
+                    this.$router.push('/login')
+                }
 			})
 			
 		}

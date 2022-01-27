@@ -46,7 +46,7 @@ export default {
             .post(url,str)
             .then((res) => {
                 if(res.status === 200){
-                    this.$router.replace("/login")
+                    this.$router.push("/login")
                 }
                 else {
                     console.log(res.data)

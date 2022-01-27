@@ -98,6 +98,10 @@ export default {
                 }
                 else {
                     console.log(res.data)
+                    if(error.status === 403){
+                    alert("로그인해 주세요")
+                    this.$router.push('/login')
+                }
                 }
                 
             })
