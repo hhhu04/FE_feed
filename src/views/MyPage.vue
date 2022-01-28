@@ -1,7 +1,7 @@
 <template>
 <div id="My">
     <div>
-        <h1>게시판 등록</h1>
+        <h1>내 정보</h1>
         <table class="tbAdd" >
             <colgroup>
                 <col width="15%" />
@@ -59,7 +59,8 @@ export default {
     },
     methods:{
         putData(){
-            this.$router.replace("/put/user")
+            alert("준비중")
+            // this.$router.replace("/put/user")
         },
         deleteData(){
             if(confirm("정말 삭제 하시겠습니까?")){
@@ -104,9 +105,13 @@ export default {
                 }
                 
             })
-            .catch((error) => {
+            .catch((err) => {
                 console.log(1)
-                console.log(error);
+                console.log(err);
+                if(err.status === 403){
+                    alert("로그인해 주세요")
+                    this.$router.push('/login')
+                }
             })
         
         }
