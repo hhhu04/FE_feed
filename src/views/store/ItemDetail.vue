@@ -105,7 +105,7 @@ export default {
             .catch((err) => {
                 console.log(1)
                 console.log(err);
-                 if(err.status === 403){
+                 if(err.response.status === 403){
                     alert("로그인해 주세요")
                     this.$router.push('/login')
                 }
