@@ -31,6 +31,7 @@
                 <!-- <td class="txt_cont"><img :src="require(`@/assets/${img}`)" class="social"></td> -->
                 <td class="txt_cont"><img :src="imgUrl" class="social"></td>
             </tr>
+            <tr><b-button block variant="outline-secondary" @click="box()">장바구니 넣기</b-button></tr>
         </table>
         <hr>
       
@@ -57,10 +58,39 @@ export default {
             amount:'',
             userid: '',
             token: this.$cookies.get("token"),
-            imgUrl: ''
+            imgUrl: '',
+            id: ''
         }
     },
     methods:{
+        box(){
+            var url = this.$host + '/store/insert_box'
+            const str = {
+                id:this.id,
+            }
+
+            this.$axios
+            .put(url,str,{
+                headers: {
+                Authorization:this.$cookies.get("token")
+            }
+        })
+            .then((res) => {
+                if(res.status === 200){
+                    console.log(res.data)
+                }
+                
+            })
+            .catch((err) => {
+                console.log(1)
+                console.log(err);
+                 if(err.response.status === 403){
+                    alert("로그인해 주세요")
+                    this.$router.push('/login')
+                }
+            })
+        
+        },
         back(){
             this.$router.push("/store")
         },
@@ -85,6 +115,7 @@ export default {
         })
             .then((res) => {
                 if(res.status === 200){
+                    this.id = res.data.data.id
                     this.price = res.data.data.price
                     this.name = res.data.data.name
                     this.nickName = res.data.data.nickName

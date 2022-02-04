@@ -34,7 +34,7 @@
             </tr>
         </table>
         <b-button block variant="outline-secondary" @click="back()">뒤로</b-button>
-        <b-button block variant="outline-secondary" @click="back()">장바구니</b-button>
+        <b-button block variant="outline-secondary" @click="box()">장바구니</b-button>
         <b-button block variant="outline-secondary" @click="putData()">수정</b-button>
         <b-button block variant="outline-secondary" @click="deleteData()">탈퇴</b-button>
     </div>
@@ -58,6 +58,9 @@ export default {
         }
     },
     methods:{
+        box(){
+            this.$router.push("/basket")
+        },
         putData(){
             alert("준비중")
             // this.$router.replace("/put/user")

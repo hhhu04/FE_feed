@@ -12,6 +12,7 @@ import Social from './views/Social'
 import Store from "./views/store/Store"
 import NewItem from "./views/store/NewItem"
 import ItemDetail from "./views/store/ItemDetail"
+import Basket from "./views/Basket"
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,7 @@ const router = new VueRouter({
         {path:"/store",component:Store},
         {path:"/store/new",component:NewItem},
         {path:"/store/:id",component:ItemDetail},
+        {path:"/basket",component:Basket},
     ]
 })
 
