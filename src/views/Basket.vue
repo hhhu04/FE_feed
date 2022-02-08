@@ -72,7 +72,32 @@ export default {
              this.$router.replace('/mypage')
          },
         buy(){
-            alert("준비중")
+            var url = this.$host + '/store/payment'
+            const str = {totalPrice:this.price}
+            this.$axios
+            .post(url,str,{
+                headers: {
+                Authorization:this.$cookies.get("token")
+                }
+            })
+            .then((res) => {
+                if(res.status === 200){
+                    console.log(res.data[0])
+                    this.$cookies.set("tradeNumber",res.data[1],"60*30")
+                    this.$cookies.set("tids",res.data[2],"60*30")
+                    this.$cookies.set("price",this.price,"60*30")
+                    window.open(res.data[0])
+                }
+                else {
+                    console.log(res.data)
+                }
+                
+            })
+            .catch((error) => {
+                console.log(1)
+                console.log(error);
+            })
+        
         },
         getData() {
             var url = this.$host + '/basket'
