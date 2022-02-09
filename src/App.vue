@@ -21,7 +21,7 @@ export default {
   },
   watch: {
     $route (to, from) {
-      if(to.path != from.path) {
+      if(from.path === "/login" && to.path === "/") {
           this.$router.go()
       }
     }
