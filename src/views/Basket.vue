@@ -40,6 +40,13 @@
 </template>
 
 <script>
+
+// eslint-disable-next-line no-unused-vars
+function result(){
+    location.reload()
+    }
+    
+
 export default {
     name: "Basket",
    mounted:window.onload = function(){
@@ -87,6 +94,9 @@ export default {
                     this.$cookies.set("tids",res.data[2],"60*30")
                     this.$cookies.set("price",this.price,"60*30")
                     window.open(res.data[0])
+                    alert("테스트결제 완료")
+                    this.$router.go()
+
                 }
                 else {
                     console.log(res.data)

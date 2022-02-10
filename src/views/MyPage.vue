@@ -32,9 +32,9 @@
                 <th>상품 수</th>
                 <td>{{items}}</td>
             </tr>
-        </table>
+        </table><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <b-button block variant="outline-secondary" @click="back()">뒤로</b-button>
-        <b-button block variant="outline-secondary" @click="box()">장바구니</b-button>
         <b-button block variant="outline-secondary" @click="putData()">수정</b-button>
         <b-button block variant="outline-secondary" @click="deleteData()">탈퇴</b-button>
     </div>

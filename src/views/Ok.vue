@@ -7,6 +7,9 @@
 var path = location.href.split("?")
 var pg = path[1]
 
+
+
+
 export default {
     mounted:window.onload = function(){
       this.getData()
@@ -18,7 +21,7 @@ export default {
     },
     methods:{
         getData(){
-            alert("테스트결제 완료")
+
             var tradeNumber = this.$cookies.get("tradeNumber")
             var tids = this.$cookies.get("tids")
             var price = this.$cookies.get("price")
@@ -37,6 +40,9 @@ export default {
             .then((res) => {
                 if(res.status === 200){
                     // alert(res.data)
+                    this.$cookies.remove("tradeNumber")
+                    this.$cookies.remove("tids")
+                    this.$cookies.remove("price")
                     window.close()
                 }
                 else {

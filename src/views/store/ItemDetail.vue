@@ -77,7 +77,7 @@ export default {
         })
             .then((res) => {
                 if(res.status === 200){
-                    console.log(res.data)
+                    alert("장바구니에 저장됨")
                 }
                 
             })
